@@ -1,9 +1,18 @@
 package com.example.jpatest.entity;
 
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Parent {
     @Id
@@ -13,10 +22,11 @@ public class Parent {
     private String name;
     private int age;
 
-    @OneToMany(mappedBy = "parent", cascade =  CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
     List<Child> children = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "grand_parent_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "gpid")
     private GrandParent grandParent;
 }

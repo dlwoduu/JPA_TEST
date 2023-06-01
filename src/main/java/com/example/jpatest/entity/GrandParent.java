@@ -3,9 +3,10 @@ package com.example.jpatest.entity;
 
 import lombok.*;
 
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -20,9 +21,10 @@ public class GrandParent {
     private Long id;
 
     private String name;
+
     private int age;
 
-    @OneToMany(mappedBy = "grandParent", cascade = CascadeType.ALL)
-    List<Parent> parents = new ArrayList<>();
 
+    @OneToMany(mappedBy = "grandParent", cascade = CascadeType.MERGE)
+    private List<Parent> parents;
 }

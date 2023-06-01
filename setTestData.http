@@ -1,8 +1,17 @@
-
-POST http://localhost:8080/add/grand-parent
+POST http://localhost:8080//setTestData
 Content-Type: application/json
 
-{
-  "age": 80,
-  "name": "grandparent_1"
-}
+###
+
+DELETE http://localhost:8080//grand-parent/1
+
+
+###
+PUT http://localhost:8080//grand-parent/80/85
+
+
+
+
+select * from grand_parent;
+select * from parent;
+select * from child;

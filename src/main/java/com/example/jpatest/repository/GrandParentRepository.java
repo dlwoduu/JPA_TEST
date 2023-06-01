@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GrandParentRepository extends JpaRepository<GrandParent, Long> {
+
+    public GrandParent findByAge(int age);
+
 }

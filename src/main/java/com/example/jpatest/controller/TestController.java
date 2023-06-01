@@ -1,23 +1,27 @@
 package com.example.jpatest.controller;
 
-import com.example.jpatest.entity.GrandParent;
 import com.example.jpatest.service.TestService;
+import org.hibernate.annotations.Parent;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Member;
 
 @RestController
-@RequestMapping(path = "/add")
+@RequestMapping(path = "/")
 public class TestController {
 
     private final TestService testService;
-    @PostMapping(path="/grand-parent")
-    public boolean addGrandParent(@RequestBody GrandParent grandParent){
+    @PostMapping(path="/setTestData")
+    public boolean setTestData(){
+        return testService.setTestData();
+    }
 
-        testService.addGrandParent(grandParent);
-
-        return true;
+    @PutMapping(path = "/grand-parent/{from}/{to}")
+    public boolean deleteGrandParent(@PathVariable("from") Long from, @PathVariable("to") Long to){
+        return testService.updateGrandParent(from, to);
+    }
+    @DeleteMapping(path = "/grand-parent/{id}")
+    public boolean deleteGrandParent(@PathVariable("id") Long id){
+        return testService.deleteGrandParent(id);
     }
 
     TestController(TestService testService){
